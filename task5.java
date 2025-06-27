@@ -1,46 +1,22 @@
-class Counter {
-    private int count = 0;
-
-    public  void increment() {
-        count++;
-    }
-
-    public int getCount() {
-        return count;
-    }
-}
-
-class ThreadDemo1 extends Thread {
-    Counter3 counter;
-
-    ThreadDemo1(Counter3 counter) {
-        this.counter = counter;
-    }
-
-    public void run() {
-        for (int i = 0; i < 10000; i++) {
-            counter.increment();
-
-        }
-    }
-}
-
 public class task5 {
-    public static void main(String[] args) {
-        Counter3 counter = new Counter3();
-        ThreadDemo1 t1 = new ThreadDemo1(counter);
-        ThreadDemo1 t2 = new ThreadDemo1(counter);
 
-        t1.start();
-        t2.start();
-
+    public static void main(String args[]) {
         try {
-            t1.join();
-            t2.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            int a[] = new int[2];
+            int b = 10;
+            int c = 1/b;
+            System.out.println("Access element three :" + a[3]);
         }
-
-        System.out.println("Final count: " + counter.getCount());
+        catch (ArithmeticException e) {
+            System.out.println("ArithmeticException thrown  :" + e);
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("ArrayIndexOutOfBoundsException thrown  :" + e);
+        }catch (Exception e) {
+            System.out.println("Exception thrown  :" + e.getMessage());
+        } finally {
+            System.out.println("We reached finally block");
+        }
+        System.out.println("Out of the block");
     }
 }

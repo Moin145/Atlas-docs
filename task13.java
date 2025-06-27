@@ -1,26 +1,16 @@
-class InterruptibleThread extends Thread {
-    public void run() {
-        try {
-            while (!Thread.currentThread().isInterrupted()) {
-                System.out.println("Thread is running");
-                Thread.sleep(100);
-            }
-        } catch (InterruptedException e) {
-            System.out.println("Thread was interrupted");
-        }
+class OuterClass2 {
+    static int x = 10;
+
+    // Static nested class
+    static class InnerClass2 {
+        int y = 5;
     }
 }
 
 public class task13 {
     public static void main(String[] args) {
-        InterruptibleThread thread = new InterruptibleThread();
-        thread.start();
-
-        try {
-            Thread.sleep(500);
-            thread.interrupt();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        OuterClass2.InnerClass2 myInner = new OuterClass2.InnerClass2();
+        OuterClass2 myOuter2 = new OuterClass2();
+        System.out.println(myInner.y + myOuter2.x);
     }
 }
