@@ -1,0 +1,16 @@
+{
+  "TableName": "BankingAccounts",
+  "KeySchema": [
+    {
+      "AttributeName": "accountNumber",
+      "KeyType": "HASH"
+    }
+  ],
+  "AttributeDefinitions": [
+    {
+      "AttributeName": "accountNumber",
+      "AttributeType": "S"
+    }
+  ],
+  "BillingMode": "PAY_PER_REQUEST"
+}

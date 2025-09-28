@@ -1,0 +1,114 @@
+classDiagram
+  direction LR
+
+  class Customer {
+    +UUID customerId
+    +string fullName
+    +string email
+    +string phone
+    +string addressLine1
+    +string addressLine2
+    +string city
+    +string country
+    +ZonedDateTime createdAt
+    +ZonedDateTime updatedAt
+    +CustomerStatus status
+  }
+
+  class Account {
+    +UUID accountId
+    +string accountNumber
+    +AccountType accountType
+    +decimal balance
+    +string currency
+    +AccountStatus status
+    +ZonedDateTime openedAt
+    +ZonedDateTime closedAt (optional)
+    +UUID customerId
+  }
+
+  class Transaction {
+    +UUID transactionId
+    +TransactionType type
+    +decimal amount
+    +string currency
+    +UUID sourceAccountId (nullable)
+    +UUID destinationAccountId (nullable)
+    +TransactionStatus status
+    +string description
+    +string reference
+    +ZonedDateTime createdAt
+    +UUID createdByUserId
+  }
+
+  class Audit {
+    +UUID auditId
+    +AuditAction action
+    +string entityType
+    +UUID entityId
+    +UUID actorId
+    +string actorType
+    +ZonedDateTime performedAt
+    +string ipAddress
+    +string metadataJson
+  }
+
+  class AccountType {
+    <<enumeration>>
+    CHECKING
+    SAVINGS
+    FIXED_DEPOSIT
+    LOAN
+  }
+
+  class TransactionType {
+    <<enumeration>>
+    DEPOSIT
+    WITHDRAWAL
+    TRANSFER
+    REVERSAL
+    FEE
+    INTEREST
+  }
+
+  class CustomerStatus {
+    <<enumeration>>
+    ACTIVE
+    SUSPENDED
+    CLOSED
+  }
+
+  class AccountStatus {
+    <<enumeration>>
+    ACTIVE
+    FROZEN
+    CLOSED
+  }
+
+  class TransactionStatus {
+    <<enumeration>>
+    PENDING
+    COMPLETED
+    FAILED
+    REVERSED
+  }
+
+  class AuditAction {
+    <<enumeration>>
+    CREATE
+    UPDATE
+    DELETE
+    LOGIN
+    LOGOUT
+    APPROVE
+    REJECT
+    EXECUTE_TRANSACTION
+  }
+
+  Customer "1" --> "1..*" Account : owns
+  Transaction "*" --> "0..1" Account : sourceAccount
+  Transaction "*" --> "0..1" Account : destinationAccount
+
+  Audit "*" ..> Customer : entity
+  Audit "*" ..> Account : entity
+  Audit "*" ..> Transaction : entity

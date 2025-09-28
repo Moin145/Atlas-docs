@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1200 800">
+  <defs>
+    <style>
+      .class-box { fill: #f9f9f9; stroke: #333; stroke-width: 2; }
+      .class-title { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #333; }
+      .class-attribute { font-family: Arial, sans-serif; font-size: 12px; fill: #666; }
+      .enum-box { fill: #e8f4fd; stroke: #2196f3; stroke-width: 2; }
+      .relationship-line { stroke: #333; stroke-width: 2; fill: none; }
+      .relationship-label { font-family: Arial, sans-serif; font-size: 10px; fill: #333; }
+    </style>
+  </defs>
+  
+  <!-- Customer Class -->
+  <rect x="50" y="50" width="200" height="200" class="class-box"/>
+  <text x="150" y="75" text-anchor="middle" class="class-title">Customer</text>
+  <line x1="50" y1="85" x2="250" y2="85" stroke="#333" stroke-width="1"/>
+  <text x="60" y="105" class="class-attribute">+ customerId: UUID</text>
+  <text x="60" y="125" class="class-attribute">+ fullName: string</text>
+  <text x="60" y="145" class="class-attribute">+ email: string</text>
+  <text x="60" y="165" class="class-attribute">+ phone: string</text>
+  <text x="60" y="185" class="class-attribute">+ city: string</text>
+  <text x="60" y="205" class="class-attribute">+ status: CustomerStatus</text>
+  <text x="60" y="225" class="class-attribute">+ createdAt: ZonedDateTime</text>
+  
+  <!-- Account Class -->
+  <rect x="350" y="50" width="200" height="200" class="class-box"/>
+  <text x="450" y="75" text-anchor="middle" class="class-title">Account</text>
+  <line x1="350" y1="85" x2="550" y2="85" stroke="#333" stroke-width="1"/>
+  <text x="360" y="105" class="class-attribute">+ accountId: UUID</text>
+  <text x="360" y="125" class="class-attribute">+ accountNumber: string</text>
+  <text x="360" y="145" class="class-attribute">+ accountType: AccountType</text>
+  <text x="360" y="165" class="class-attribute">+ balance: decimal</text>
+  <text x="360" y="185" class="class-attribute">+ status: AccountStatus</text>
+  <text x="360" y="205" class="class-attribute">+ openedAt: ZonedDateTime</text>
+  <text x="360" y="225" class="class-attribute">+ customerId: UUID</text>
+  
+  <!-- Transaction Class -->
+  <rect x="650" y="50" width="200" height="200" class="class-box"/>
+  <text x="750" y="75" text-anchor="middle" class="class-title">Transaction</text>
+  <line x1="650" y1="85" x2="850" y2="85" stroke="#333" stroke-width="1"/>
+  <text x="660" y="105" class="class-attribute">+ transactionId: UUID</text>
+  <text x="660" y="125" class="class-attribute">+ type: TransactionType</text>
+  <text x="660" y="145" class="class-attribute">+ amount: decimal</text>
+  <text x="660" y="165" class="class-attribute">+ sourceAccountId: UUID</text>
+  <text x="660" y="185" class="class-attribute">+ destinationAccountId: UUID</text>
+  <text x="660" y="205" class="class-attribute">+ status: TransactionStatus</text>
+  <text x="660" y="225" class="class-attribute">+ createdAt: ZonedDateTime</text>
+  
+  <!-- Audit Class -->
+  <rect x="950" y="50" width="200" height="200" class="class-box"/>
+  <text x="1050" y="75" text-anchor="middle" class="class-title">Audit</text>
+  <line x1="950" y1="85" x2="1150" y2="85" stroke="#333" stroke-width="1"/>
+  <text x="960" y="105" class="class-attribute">+ auditId: UUID</text>
+  <text x="960" y="125" class="class-attribute">+ action: AuditAction</text>
+  <text x="960" y="145" class="class-attribute">+ entityType: string</text>
+  <text x="960" y="165" class="class-attribute">+ entityId: UUID</text>
+  <text x="960" y="185" class="class-attribute">+ actorId: UUID</text>
+  <text x="960" y="205" class="class-attribute">+ performedAt: ZonedDateTime</text>
+  <text x="960" y="225" class="class-attribute">+ ipAddress: string</text>
+  
+  <!-- Enumerations -->
+  <!-- AccountType Enum -->
+  <rect x="50" y="350" width="150" height="120" class="enum-box"/>
+  <text x="125" y="375" text-anchor="middle" class="class-title">AccountType</text>
+  <line x1="50" y1="385" x2="200" y2="385" stroke="#2196f3" stroke-width="1"/>
+  <text x="60" y="405" class="class-attribute">CHECKING</text>
+  <text x="60" y="425" class="class-attribute">SAVINGS</text>
+  <text x="60" y="445" class="class-attribute">FIXED_DEPOSIT</text>
+  <text x="60" y="465" class="class-attribute">LOAN</text>
+  
+  <!-- TransactionType Enum -->
+  <rect x="250" y="350" width="150" height="120" class="enum-box"/>
+  <text x="325" y="375" text-anchor="middle" class="class-title">TransactionType</text>
+  <line x1="250" y1="385" x2="400" y2="385" stroke="#2196f3" stroke-width="1"/>
+  <text x="260" y="405" class="class-attribute">DEPOSIT</text>
+  <text x="260" y="425" class="class-attribute">WITHDRAWAL</text>
+  <text x="260" y="445" class="class-attribute">TRANSFER</text>
+  <text x="260" y="465" class="class-attribute">REVERSAL</text>
+  
+  <!-- CustomerStatus Enum -->
+  <rect x="450" y="350" width="150" height="120" class="enum-box"/>
+  <text x="525" y="375" text-anchor="middle" class="class-title">CustomerStatus</text>
+  <line x1="450" y1="385" x2="600" y2="385" stroke="#2196f3" stroke-width="1"/>
+  <text x="460" y="405" class="class-attribute">ACTIVE</text>
+  <text x="460" y="425" class="class-attribute">SUSPENDED</text>
+  <text x="460" y="445" class="class-attribute">CLOSED</text>
+  
+  <!-- AccountStatus Enum -->
+  <rect x="650" y="350" width="150" height="120" class="enum-box"/>
+  <text x="725" y="375" text-anchor="middle" class="class-title">AccountStatus</text>
+  <line x1="650" y1="385" x2="800" y2="385" stroke="#2196f3" stroke-width="1"/>
+  <text x="660" y="405" class="class-attribute">ACTIVE</text>
+  <text x="660" y="425" class="class-attribute">FROZEN</text>
+  <text x="660" y="445" class="class-attribute">CLOSED</text>
+  
+  <!-- TransactionStatus Enum -->
+  <rect x="850" y="350" width="150" height="120" class="enum-box"/>
+  <text x="925" y="375" text-anchor="middle" class="class-title">TransactionStatus</text>
+  <line x1="850" y1="385" x2="1000" y2="385" stroke="#2196f3" stroke-width="1"/>
+  <text x="860" y="405" class="class-attribute">PENDING</text>
+  <text x="860" y="425" class="class-attribute">COMPLETED</text>
+  <text x="860" y="445" class="class-attribute">FAILED</text>
+  <text x="860" y="465" class="class-attribute">REVERSED</text>
+  
+  <!-- AuditAction Enum -->
+  <rect x="1050" y="350" width="150" height="120" class="enum-box"/>
+  <text x="1125" y="375" text-anchor="middle" class="class-title">AuditAction</text>
+  <line x1="1050" y1="385" x2="1200" y2="385" stroke="#2196f3" stroke-width="1"/>
+  <text x="1060" y="405" class="class-attribute">CREATE</text>
+  <text x="1060" y="425" class="class-attribute">UPDATE</text>
+  <text x="1060" y="445" class="class-attribute">DELETE</text>
+  <text x="1060" y="465" class="class-attribute">EXECUTE_TRANSACTION</text>
+  
+  <!-- Relationships -->
+  <!-- Customer to Account (1 to many) -->
+  <line x1="250" y1="150" x2="350" y2="150" class="relationship-line" marker-end="url(#arrowhead)"/>
+  <text x="300" y="140" text-anchor="middle" class="relationship-label">1</text>
+  <text x="300" y="160" text-anchor="middle" class="relationship-label">1..*</text>
+  <text x="300" y="180" text-anchor="middle" class="relationship-label">owns</text>
+  
+  <!-- Transaction to Account (source) -->
+  <line x1="650" y1="150" x2="550" y2="150" class="relationship-line" marker-end="url(#arrowhead)"/>
+  <text x="600" y="140" text-anchor="middle" class="relationship-label">*</text>
+  <text x="600" y="160" text-anchor="middle" class="relationship-label">0..1</text>
+  <text x="600" y="180" text-anchor="middle" class="relationship-label">sourceAccount</text>
+  
+  <!-- Transaction to Account (destination) -->
+  <line x1="650" y1="200" x2="550" y2="200" class="relationship-line" marker-end="url(#arrowhead)"/>
+  <text x="600" y="190" text-anchor="middle" class="relationship-label">*</text>
+  <text x="600" y="210" text-anchor="middle" class="relationship-label">0..1</text>
+  <text x="600" y="230" text-anchor="middle" class="relationship-label">destinationAccount</text>
+  
+  <!-- Audit to Customer -->
+  <line x1="950" y1="150" x2="250" y2="150" class="relationship-line" stroke-dasharray="5,5"/>
+  <text x="600" y="140" text-anchor="middle" class="relationship-label">*</text>
+  <text x="600" y="160" text-anchor="middle" class="relationship-label">entity</text>
+  
+  <!-- Audit to Account -->
+  <line x1="950" y1="200" x2="550" y2="200" class="relationship-line" stroke-dasharray="5,5"/>
+  <text x="750" y="190" text-anchor="middle" class="relationship-label">*</text>
+  <text x="750" y="210" text-anchor="middle" class="relationship-label">entity</text>
+  
+  <!-- Audit to Transaction -->
+  <line x1="950" y1="250" x2="850" y2="250" class="relationship-line" stroke-dasharray="5,5"/>
+  <text x="900" y="240" text-anchor="middle" class="relationship-label">*</text>
+  <text x="900" y="260" text-anchor="middle" class="relationship-label">entity</text>
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+    </marker>
+  </defs>
+</svg>

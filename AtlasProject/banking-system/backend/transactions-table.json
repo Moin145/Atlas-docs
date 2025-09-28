@@ -1,0 +1,16 @@
+{
+  "TableName": "BankingTransactions",
+  "KeySchema": [
+    {
+      "AttributeName": "transactionId",
+      "KeyType": "HASH"
+    }
+  ],
+  "AttributeDefinitions": [
+    {
+      "AttributeName": "transactionId",
+      "AttributeType": "S"
+    }
+  ],
+  "BillingMode": "PAY_PER_REQUEST"
+}

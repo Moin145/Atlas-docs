@@ -1,0 +1,172 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" font-family="Segoe UI, Roboto, Arial" font-size="14">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,3 L0,6 z" fill="#333" />
+    </marker>
+    <style>
+      .box { fill: #fff; stroke: #666; stroke-width: 1.2; rx: 6; }
+      .title { fill: #fff; font-weight: 600; }
+      .titlebar { fill: #6c63ff; }
+      .section { fill: #333; }
+      .enumtitlebar { fill: #00bcd4; }
+      .enum { font-style: italic; }
+      .rel { stroke: #333; stroke-width: 1.4; fill: none; marker-end: url(#arrow); }
+      .note { fill: #f7f7f7; stroke: #bbb; rx: 6; }
+      .muted { fill: #666; }
+      .badge { fill: #eee; stroke: #bbb; rx: 4; }
+      .mono { font-family: Consolas, Menlo, monospace; font-size: 12px; }
+    </style>
+  </defs>
+
+  <!-- Customer -->
+  <g transform="translate(60,80)">
+    <rect class="box" x="0" y="0" width="350" height="250"/>
+    <rect class="titlebar" x="0" y="0" width="350" height="36"/>
+    <text class="title" x="16" y="24">Customer</text>
+    <g transform="translate(16,56)">
+      <text class="section">+ customerId: string</text>
+      <text class="section" y="24">+ fullName: string</text>
+      <text class="section" y="48">+ email: string</text>
+      <text class="section" y="72">+ phone: string</text>
+      <text class="section" y="96">+ address: string</text>
+      <text class="section" y="120">+ city: string</text>
+      <text class="section" y="144">+ country: string</text>
+      <text class="section" y="168">+ status: CustomerStatus</text>
+    </g>
+  </g>
+
+  <!-- Account -->
+  <g transform="translate(525,60)">
+    <rect class="box" x="0" y="0" width="350" height="270"/>
+    <rect class="titlebar" x="0" y="0" width="350" height="36"/>
+    <text class="title" x="16" y="24">Account</text>
+    <g transform="translate(16,56)">
+      <text class="section">+ accountId: string</text>
+      <text class="section" y="24">+ accountNumber: string</text>
+      <text class="section" y="48">+ accountType: AccountType</text>
+      <text class="section" y="72">+ balance: number</text>
+      <text class="section" y="96">+ currency: string</text>
+      <text class="section" y="120">+ status: AccountStatus</text>
+      <text class="section" y="144">+ openedAt: string</text>
+      <text class="section" y="168">+ closedAt: string?</text>
+      <text class="section" y="192">+ customerId: string</text>
+    </g>
+  </g>
+
+  <!-- Transaction -->
+  <g transform="translate(990,60)">
+    <rect class="box" x="0" y="0" width="350" height="270"/>
+    <rect class="titlebar" x="0" y="0" width="350" height="36"/>
+    <text class="title" x="16" y="24">Transaction</text>
+    <g transform="translate(16,56)">
+      <text class="section">+ transactionId: string</text>
+      <text class="section" y="24">+ type: TransactionType</text>
+      <text class="section" y="48">+ amount: number</text>
+      <text class="section" y="72">+ currency: string</text>
+      <text class="section" y="96">+ sourceAccountId: string?</text>
+      <text class="section" y="120">+ destinationAccountId: string?</text>
+      <text class="section" y="144">+ status: TransactionStatus</text>
+      <text class="section" y="168">+ description: string</text>
+      <text class="section" y="192">+ createdAt: string</text>
+      <text class="section" y="216">+ createdByUserId: string</text>
+    </g>
+  </g>
+
+  <!-- Audit -->
+  <g transform="translate(525,380)">
+    <rect class="box" x="0" y="0" width="350" height="230"/>
+    <rect class="titlebar" x="0" y="0" width="350" height="36"/>
+    <text class="title" x="16" y="24">Audit</text>
+    <g transform="translate(16,56)">
+      <text class="section">+ auditId: string</text>
+      <text class="section" y="24">+ action: AuditAction</text>
+      <text class="section" y="48">+ entityType: string</text>
+      <text class="section" y="72">+ entityId: string</text>
+      <text class="section" y="96">+ actorId: string</text>
+      <text class="section" y="120">+ actorType: string</text>
+      <text class="section" y="144">+ performedAt: string</text>
+    </g>
+  </g>
+
+  <!-- Enums -->
+  <g transform="translate(80,380)">
+    <rect class="box" x="0" y="0" width="270" height="160"/>
+    <rect class="enumtitlebar" x="0" y="0" width="270" height="32"/>
+    <text class="title" x="16" y="22">AccountType «enum»</text>
+    <g transform="translate(16,52)">
+      <text class="enum">CHECKING</text>
+      <text class="enum" y="22">SAVINGS</text>
+      <text class="enum" y="44">FIXED_DEPOSIT</text>
+      <text class="enum" y="66">LOAN</text>
+    </g>
+  </g>
+
+  <g transform="translate(990,380)">
+    <rect class="box" x="0" y="0" width="270" height="160"/>
+    <rect class="enumtitlebar" x="0" y="0" width="270" height="32"/>
+    <text class="title" x="16" y="22">TransactionType «enum»</text>
+    <g transform="translate(16,52)">
+      <text class="enum">DEPOSIT</text>
+      <text class="enum" y="22">WITHDRAWAL</text>
+      <text class="enum" y="44">TRANSFER</text>
+      <text class="enum" y="66">FEE, INTEREST, REVERSAL</text>
+    </g>
+  </g>
+
+  <g transform="translate(80,570)">
+    <rect class="box" x="0" y="0" width="270" height="120"/>
+    <rect class="enumtitlebar" x="0" y="0" width="270" height="32"/>
+    <text class="title" x="16" y="22">AccountStatus «enum»</text>
+    <g transform="translate(16,52)">
+      <text class="enum">ACTIVE</text>
+      <text class="enum" y="22">FROZEN</text>
+      <text class="enum" y="44">CLOSED</text>
+    </g>
+  </g>
+
+  <g transform="translate(990,570)">
+    <rect class="box" x="0" y="0" width="270" height="120"/>
+    <rect class="enumtitlebar" x="0" y="0" width="270" height="32"/>
+    <text class="title" x="16" y="22">TransactionStatus «enum»</text>
+    <g transform="translate(16,52)">
+      <text class="enum">PENDING</text>
+      <text class="enum" y="22">COMPLETED</text>
+      <text class="enum" y="44">FAILED / REVERSED</text>
+    </g>
+  </g>
+
+  <g transform="translate(525,640)">
+    <rect class="box" x="0" y="0" width="350" height="120"/>
+    <rect class="enumtitlebar" x="0" y="0" width="350" height="32"/>
+    <text class="title" x="16" y="22">AuditAction «enum»</text>
+    <g transform="translate(16,52)">
+      <text class="enum">CREATE, UPDATE, DELETE, LOGIN, LOGOUT, APPROVE, REJECT, EXECUTE_TRANSACTION</text>
+    </g>
+  </g>
+
+  <!-- Relationships -->
+  <!-- Customer 1 -> 1..* Account -->
+  <path class="rel" d="M410,175 L525,175"/>
+  <text class="muted mono" x="430" y="160">1</text>
+  <text class="muted mono" x="475" y="160">1..*</text>
+
+  <!-- Transaction source/destination to Account -->
+  <path class="rel" d="M990,150 L875,150"/>
+  <text class="muted mono" x="900" y="135">0..1</text>
+  <path class="rel" d="M990,220 L875,220"/>
+  <text class="muted mono" x="900" y="205">0..1</text>
+
+  <!-- Audit -> entities (dependency dotted look via small dashes) -->
+  <path class="rel" style="stroke-dasharray:4 4" d="M700,380 L700,330"/>
+  <path class="rel" style="stroke-dasharray:4 4" d="M700,380 L380,280"/>
+  <path class="rel" style="stroke-dasharray:4 4" d="M700,380 L1170,280"/>
+
+  <!-- Legend -->
+  <g transform="translate(60,740)">
+    <rect class="note" x="0" y="0" width="1280" height="110"/>
+    <text x="16" y="24" class="section">Notes</text>
+    <text x="16" y="50" class="muted">- Deposit: sourceAccountId = null; Withdrawal: destinationAccountId = null; Transfer: both set.</text>
+    <text x="16" y="72" class="muted">- Balance updates must be atomic; currency should be consistent unless FX supported.</text>
+    <text x="16" y="94" class="muted">- Audit records actions on Customer, Account, Transaction with actor and timestamp.</text>
+  </g>
+</svg>

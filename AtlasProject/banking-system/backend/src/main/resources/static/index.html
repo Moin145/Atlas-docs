@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking Transaction System</title>
+    <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect width="128" height="128" rx="24" fill="%230b1220"/><circle cx="32" cy="40" r="8" fill="%2300d1ff"/><circle cx="96" cy="88" r="8" fill="%237f5af0"/><path d="M20 64h88" stroke="%23e5e7eb" stroke-width="8" stroke-linecap="round"/><path d="M32 40c16-16 48-16 64 0M32 88c16 16 48 16 64 0" stroke="%2300d1ff" stroke-width="6" fill="none"/></svg>' />
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-money-check-dollar"></i>
+                    <h1>Banking Transaction System</h1>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-outline" onclick="showSection('dashboard')">
+                        <i class="fas fa-home"></i> Dashboard
+                    </button>
+                    <button class="btn btn-primary" onclick="showSection('transactions')">
+                        <i class="fas fa-exchange-alt"></i> Transactions
+                    </button>
+                    <button class="btn btn-secondary" id="themeToggleBtn" title="Toggle theme">
+                        <i class="fas fa-moon"></i> Theme
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="sidebar">
+            <ul class="nav-menu">
+                <li class="nav-item active" onclick="showSection('dashboard')">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </li>
+                <li class="nav-item" onclick="showSection('customers')">
+                    <i class="fas fa-users"></i>
+                    <span>Customers</span>
+                </li>
+                <li class="nav-item" onclick="showSection('accounts')">
+                    <i class="fas fa-credit-card"></i>
+                    <span>Accounts</span>
+                </li>
+                <li class="nav-item" onclick="showSection('deposit')">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>Deposit</span>
+                </li>
+                <li class="nav-item" onclick="showSection('withdraw')">
+                    <i class="fas fa-minus-circle"></i>
+                    <span>Withdraw</span>
+                </li>
+                <li class="nav-item" onclick="showSection('transfer')">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>Transfer</span>
+                </li>
+                <li class="nav-item" onclick="showSection('history')">
+                    <i class="fas fa-history"></i>
+                    <span>Transaction History</span>
+                </li>
+                <li class="nav-item" onclick="showSection('undo-redo')">
+                    <i class="fas fa-undo"></i>
+                    <span>Undo/Redo</span>
+                </li>
+                <li class="nav-item" onclick="showSection('audit')">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>Audit Logs</span>
+                </li>
+                <li class="nav-item" onclick="showSection('uml')">
+                    <i class="fas fa-project-diagram"></i>
+                    <span>UML Diagram</span>
+                </li>
+                <li class="nav-item" onclick="showSection('sync')">
+                    <i class="fas fa-sync-alt"></i>
+                    <span>Data Sync</span>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="content-section active">
+                <div class="section-header">
+                    <h2><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
+                    <p>Welcome to Indian Banking System - Your financial partner</p>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalCustomers">0</h3>
+                            <p>Total Customers</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalAccounts">0</h3>
+                            <p>Total Accounts</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-rupee-sign"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalBalance">₹0</h3>
+                            <p>Total Balance</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalTransactions">0</h3>
+                            <p>Total Transactions</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h3>Recent Activity</h3>
+                    <div id="recentActivity" class="activity-list">
+                        <!-- Recent activity will be loaded here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Transactions Hub Section -->
+            <section id="transactions" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-exchange-alt"></i> Transactions</h2>
+                    <p>Choose an operation to continue</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card" onclick="showSection('deposit')" style="cursor:pointer">
+                        <div class="stat-icon"><i class="fas fa-plus-circle"></i></div>
+                        <div class="stat-content">
+                            <h3>Deposit</h3>
+                            <p>Add money to an account</p>
+                        </div>
+                    </div>
+                    <div class="stat-card" onclick="showSection('withdraw')" style="cursor:pointer">
+                        <div class="stat-icon"><i class="fas fa-minus-circle"></i></div>
+                        <div class="stat-content">
+                            <h3>Withdraw</h3>
+                            <p>Withdraw funds from an account</p>
+                        </div>
+                    </div>
+                    <div class="stat-card" onclick="showSection('transfer')" style="cursor:pointer">
+                        <div class="stat-icon"><i class="fas fa-exchange-alt"></i></div>
+                        <div class="stat-content">
+                            <h3>Transfer</h3>
+                            <p>Move money between accounts</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Customers Section -->
+            <section id="customers" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-users"></i> Customers</h2>
+                    <button class="btn btn-primary" onclick="showCreateCustomerForm()">
+                        <i class="fas fa-plus"></i> Add Customer
+                    </button>
+                </div>
+                
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Customer ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Mobile</th>
+                                <th>City</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customersTableBody">
+                            <!-- Customer data will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Accounts Section -->
+            <section id="accounts" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-credit-card"></i> Accounts</h2>
+                    <button class="btn btn-primary" onclick="showCreateAccountForm()">
+                        <i class="fas fa-plus"></i> Create Account
+                    </button>
+                </div>
+                
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Account Number</th>
+                                <th>Customer</th>
+                                <th>Type</th>
+                                <th>Balance</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="accountsTableBody">
+                            <!-- Account data will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Deposit Section -->
+            <section id="deposit" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-plus-circle"></i> Deposit Money</h2>
+                </div>
+                
+                <div class="form-container">
+                    <form id="depositForm" class="transaction-form">
+                        <div class="form-group">
+                            <label for="depositAccountNumber">Account Number</label>
+                            <input type="text" id="depositAccountNumber" name="accountNumber" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="depositAmount">Amount (₹)</label>
+                            <input type="number" id="depositAmount" name="amount" step="0.01" min="0.01" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="depositDescription">Description</label>
+                            <textarea id="depositDescription" name="description" rows="3" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-plus"></i> Process Deposit
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Withdraw Section -->
+            <section id="withdraw" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-minus-circle"></i> Withdraw Money</h2>
+                </div>
+                
+                <div class="form-container">
+                    <form id="withdrawForm" class="transaction-form">
+                        <div class="form-group">
+                            <label for="withdrawAccountNumber">Account Number</label>
+                            <input type="text" id="withdrawAccountNumber" name="accountNumber" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="withdrawAmount">Amount (₹)</label>
+                            <input type="number" id="withdrawAmount" name="amount" step="0.01" min="0.01" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="withdrawDescription">Description</label>
+                            <textarea id="withdrawDescription" name="description" rows="3" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-warning">
+                            <i class="fas fa-minus"></i> Process Withdrawal
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Transfer Section -->
+            <section id="transfer" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-exchange-alt"></i> Transfer Money</h2>
+                </div>
+                
+                <div class="form-container">
+                    <form id="transferForm" class="transaction-form">
+                        <div class="form-group">
+                            <label for="sourceAccountNumber">Source Account Number</label>
+                            <input type="text" id="sourceAccountNumber" name="sourceAccountNumber" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="destinationAccountNumber">Destination Account Number</label>
+                            <input type="text" id="destinationAccountNumber" name="destinationAccountNumber" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="transferAmount">Amount (₹)</label>
+                            <input type="number" id="transferAmount" name="amount" step="0.01" min="0.01" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="transferDescription">Description</label>
+                            <textarea id="transferDescription" name="description" rows="3" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-info">
+                            <i class="fas fa-exchange-alt"></i> Process Transfer
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Transaction History Section -->
+            <section id="history" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-history"></i> Transaction History</h2>
+                </div>
+                
+                <div class="form-container">
+                    <div class="form-group">
+                        <label for="historyAccountNumber">Account Number</label>
+                        <input type="text" id="historyAccountNumber" placeholder="Enter account number">
+                        <button class="btn btn-primary" onclick="loadTransactionHistory()">
+                            <i class="fas fa-search"></i> Load History
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Transaction ID</th>
+                                <th>Type</th>
+                                <th>Amount</th>
+                                <th>Description</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyTableBody">
+                            <!-- Transaction history will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Undo/Redo Section -->
+            <section id="undo-redo" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-undo"></i> Undo/Redo Transactions</h2>
+                </div>
+                
+                <div class="form-container">
+                    <div class="form-group">
+                        <label for="undoRedoAccountId">Account ID</label>
+                        <input type="text" id="undoRedoAccountId" placeholder="Enter account ID">
+                        <button class="btn btn-secondary" onclick="checkUndoRedoStatus()">
+                            <i class="fas fa-info"></i> Check Status
+                        </button>
+                    </div>
+                    
+                    <div class="undo-redo-actions">
+                        <button class="btn btn-warning" onclick="undoTransaction()" id="undoBtn" disabled>
+                            <i class="fas fa-undo"></i> Undo Last Transaction
+                        </button>
+                        <button class="btn btn-info" onclick="redoTransaction()" id="redoBtn" disabled>
+                            <i class="fas fa-redo"></i> Redo Transaction
+                        </button>
+                    </div>
+                    
+                    <div id="undoRedoStatus" class="status-display">
+                        <!-- Status will be displayed here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Audit Logs Section -->
+            <section id="audit" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-clipboard-list"></i> Audit Logs</h2>
+                    <button class="btn btn-primary" onclick="loadAuditLogs()">
+                        <i class="fas fa-refresh"></i> Refresh
+                    </button>
+                </div>
+                
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>User ID</th>
+                                <th>Action</th>
+                                <th>Entity Type</th>
+                                <th>Result</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody id="auditTableBody">
+                            <!-- Audit logs will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- UML Diagram Section -->
+            <section id="uml" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-project-diagram"></i> System UML Diagram</h2>
+                    <div class="header-actions">
+                        <button class="btn btn-outline" id="downloadSvgBtn"><i class="fas fa-file-download"></i> Download SVG</button>
+                        <button class="btn btn-primary" id="downloadPngBtn"><i class="fas fa-file-image"></i> Download PNG</button>
+                    </div>
+                </div>
+
+                <div class="uml-container">
+                    <pre class="mermaid" id="umlDiagram">classDiagram
+
+class Customer {
+  customerId: string
+  fullName: string
+  email: string
+  phone: string
+  city: string
+}
+
+class Account {
+  accountId: string
+  accountNumber: string
+  accountType: AccountType
+  balance: number
+  status: AccountStatus
+}
+
+class Transaction {
+  transactionId: string
+  type: TransactionType
+  amount: number
+  status: TransactionStatus
+}
+
+class Audit {
+  auditId: string
+  action: AuditAction
+  entityType: string
+}
+
+class AccountType {
+  <<enumeration>>
+  CHECKING
+  SAVINGS
+  FIXED_DEPOSIT
+  LOAN
+}
+
+class TransactionType {
+  <<enumeration>>
+  DEPOSIT
+  WITHDRAWAL
+  TRANSFER
+}
+
+class AccountStatus {
+  <<enumeration>>
+  ACTIVE
+  FROZEN
+  CLOSED
+}
+
+class TransactionStatus {
+  <<enumeration>>
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+Customer "1" --> "1..*" Account
+Transaction "*" --> "0..1" Account : source
+Transaction "*" --> "0..1" Account : destination
+Audit ..> Customer
+Audit ..> Account
+Audit ..> Transaction</pre>
+                </div>
+            </section>
+
+            <!-- Data Sync Section -->
+            <section id="sync" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-sync-alt"></i> Data Synchronization</h2>
+                    <p>Sync your MongoDB data to DynamoDB for NoSQL Workbench</p>
+                </div>
+
+                <div class="form-container">
+                    <div class="sync-info">
+                        <h3>Current Data Status</h3>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-icon"><i class="fas fa-database"></i></div>
+                                <div class="stat-content">
+                                    <h3>MongoDB</h3>
+                                    <p>Main database with customers, accounts, transactions</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon"><i class="fas fa-cloud"></i></div>
+                                <div class="stat-content">
+                                    <h3>DynamoDB</h3>
+                                    <p>Audit logs + synced data for NoSQL Workbench</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sync-actions">
+                        <button class="btn btn-primary" onclick="syncDataToDynamoDB()">
+                            <i class="fas fa-sync"></i> Sync MongoDB → DynamoDB
+                        </button>
+                        <button class="btn btn-secondary" onclick="checkSyncStatus()">
+                            <i class="fas fa-info-circle"></i> Check Sync Status
+                        </button>
+                    </div>
+
+                    <div id="syncStatus" class="status-display">
+                        <!-- Sync status will be displayed here -->
+                    </div>
+                </div>
+
+                <div class="form-container">
+                    <h3>How to View Data in Both Tools</h3>
+                    <div class="instructions">
+                        <div class="instruction-item">
+                            <h4><i class="fas fa-compass"></i> MongoDB Compass</h4>
+                            <p>1. Open MongoDB Compass</p>
+                            <p>2. Connect to: <code>mongodb://localhost:27017</code></p>
+                            <p>3. Database: <code>banking_system</code></p>
+                            <p>4. View collections: customers, accounts, transactions</p>
+                        </div>
+                        <div class="instruction-item">
+                            <h4><i class="fas fa-table"></i> NoSQL Workbench</h4>
+                            <p>1. Open NoSQL Workbench</p>
+                            <p>2. Connect to Local DynamoDB (port 8003)</p>
+                            <p>3. View tables: BankingCustomers, BankingAccounts, BankingTransactions</p>
+                            <p>4. Click "Sync" button above to populate data</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="createCustomerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Customer</h3>
+                <span class="close" onclick="closeModal('createCustomerModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="createCustomerForm">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mobileNumber">Mobile Number</label>
+                        <input type="text" id="mobileNumber" name="mobileNumber" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <textarea id="address" name="address" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <input type="text" id="state" name="state" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pincode">Pincode</label>
+                        <input type="text" id="pincode" name="pincode" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create Customer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="createAccountModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Account</h3>
+                <span class="close" onclick="closeModal('createAccountModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="createAccountForm">
+                    <div class="form-group">
+                        <label for="customerId">Customer ID</label>
+                        <input type="text" id="customerId" name="customerId" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="accountType">Account Type</label>
+                        <select id="accountType" name="accountType" required>
+                            <option value="SAVINGS">Savings Account</option>
+                            <option value="CURRENT">Current Account</option>
+                            <option value="FIXED_DEPOSIT">Fixed Deposit</option>
+                            <option value="RECURRING_DEPOSIT">Recurring Deposit</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Processing...</p>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification">
+        <span id="notificationMessage"></span>
+        <button onclick="hideNotification()">&times;</button>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.mermaid) {
+                mermaid.initialize({ startOnLoad: true, securityLevel: 'loose' });
+                mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+            }
+
+            function getUmlSvg() {
+                const umlSection = document.getElementById('uml');
+                if (!umlSection) return null;
+                const svg = umlSection.querySelector('svg');
+                return svg || null;
+            }
+
+            function serializeSvg(svgEl) {
+                const serializer = new XMLSerializer();
+                let source = serializer.serializeToString(svgEl);
+                if (!source.match(/^<svg[^>]+xmlns=/)) {
+                    source = source.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
+                }
+                if (!source.match(/xmlns:xlink=/)) {
+                    source = source.replace('<svg', '<svg xmlns:xlink="http://www.w3.org/1999/xlink"');
+                }
+                return source;
+            }
+
+            function downloadBlob(filename, blob) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+
+            const svgBtn = document.getElementById('downloadSvgBtn');
+            const pngBtn = document.getElementById('downloadPngBtn');
+
+            if (svgBtn) {
+                svgBtn.addEventListener('click', function () {
+                    const svgEl = getUmlSvg();
+                    if (!svgEl) return;
+                    const source = serializeSvg(svgEl);
+                    const blob = new Blob([source], { type: 'image/svg+xml;charset=utf-8' });
+                    downloadBlob('banking-system-uml.svg', blob);
+                });
+            }
+
+            if (pngBtn) {
+                pngBtn.addEventListener('click', function () {
+                    const svgEl = getUmlSvg();
+                    if (!svgEl) return;
+                    const source = serializeSvg(svgEl);
+                    const img = new Image();
+                    const svgUrl = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(source);
+                    img.onload = function () {
+                        const viewBox = svgEl.viewBox && svgEl.viewBox.baseVal ? svgEl.viewBox.baseVal : null;
+                        const width = viewBox ? viewBox.width : svgEl.getBBox().width || 1200;
+                        const height = viewBox ? viewBox.height : svgEl.getBBox().height || 800;
+                        const scale = 2;
+                        const canvas = document.createElement('canvas');
+                        canvas.width = Math.ceil(width * scale);
+                        canvas.height = Math.ceil(height * scale);
+                        const ctx = canvas.getContext('2d');
+                        ctx.fillStyle = '#ffffff';
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+                        ctx.setTransform(scale, 0, 0, scale, 0, 0);
+                        ctx.drawImage(img, 0, 0);
+                        canvas.toBlob(function (blob) {
+                            if (blob) downloadBlob('banking-system-uml.png', blob);
+                        }, 'image/png');
+                    };
+                    img.src = svgUrl;
+                });
+            }
+        });
+    </script>
+</body>
+</html>
